@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Enrollments{% endblock %}
+
+{% block content %}
+<h1>Enrollments</h1>
+<ul>
+    {% for item in items %}
+        <li>
+            Student: {{ item.student.name }} |
+            Course: {{ item.course.name }} |
+            Date: {{ item.date_enrolled }}
+        </li>
+    {% empty %}
+        <li>No items found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+
