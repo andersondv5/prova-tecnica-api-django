@@ -1,91 +1,97 @@
-# Sistema de Gestão Cursos e Disciplinas - API Django
-API RESTful para gestão de instituições de ensino, cursos, disciplinas, professores, alunos e matrículas.
+# Prova Técnica API Django
 
+Repositório da prova técnica para a vaga de Desenvolvedor Júnior, contendo uma API RESTful para gerenciar recursos de uma instituição de ensino.
 
-# Tecnologias
->Django 4.2 + Django REST Framework
+## 🚀 Tecnologias Utilizadas
 
->PostgreSQL
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
->Docker + Docker Compose
+- **Backend:**
+  - <a href="https://www.python.org/" target="_blank">Python</a>
+  - <a href="https://www.djangoproject.com/" target="_blank">Django 4.2</a>
+  - <a href="https://www.django-rest-framework.org/" target="_blank">Django REST Framework (DRF)</a>
+- **Banco de dados:**
+  - <a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a>
+- **Orquestração e virtualização:**
+  - <a href="https://www.docker.com/" target="_blank">Docker</a>
+  - <a href="https://docs.docker.com/compose/" target="_blank">Docker Compose</a>
+- **Documentação da API:**
+  - <a href="https://drf-spectacular.readthedocs.io/en/latest/" target="_blank">DRF Spectacular</a>
 
->DRF Spectacular (Documentação)
+## 💻 Instalação e Execução
 
+Siga os passos abaixo para configurar e rodar o projeto localmente:
 
-# Instalação Rápida
+### Pré-requisitos
 
-### Clone o repositório
-git clone https://github.com/andersondv5/prova-tecnica-api-django.git
-cd prova-tecnica-api-django
+- Docker e Docker Compose instalados na sua máquina.
 
-### Configure ambiente
-cp .env.example .env
-### Edite o .env se necessário
+### Passos
 
-### Execute
-docker-compose up --build -d
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/andersondv5/prova-tecnica-api-django.git](https://github.com/andersondv5/prova-tecnica-api-django.git)
+    cd prova-tecnica-api-django
+    ```
 
-## Migrações
-docker-compose exec web python manage.py migrate
+2.  **Execute o Docker Compose:**
+    ```bash
+    docker-compose up -d --build
+    ```
 
-### Superusuário (opcional)
-docker-compose exec web python manage.py createsuperuser
+3.  **Realize as migrações do banco de dados:**
+    ```bash
+    docker-compose exec backend python manage.py migrate
+    ```
 
-# Acesso
+4.  **Crie um superusuário (opcional, para acessar o painel de administração):**
+    ```bash
+    docker-compose exec backend python manage.py createsuperuser
+    ```
 
->API: http://localhost:8000/api/
+## 🗺️ Endpoints e URLs
 
->Documentação: http://localhost:8000/api/docs/
+Após a execução, os seguintes URLs estarão disponíveis:
 
->Admin: http://localhost:8000/admin/
+- **API:** [http://localhost:8000/api/](http://localhost:8000/api/)
+- **Documentação da API:** <a href="http://localhost:8000/api/schema/docs/" target="_blank">http://localhost:8000/api/schema/docs/</a>
+- **Painel de Administração:** [http://localhost:8000/admin/](http://localhost:8000/admin/)
 
->Frontend: http://localhost:8000/
+## 🔑 Endpoints da API
 
-# Endpoints da API
+A API oferece os seguintes endpoints para gerenciamento dos recursos:
 
+- `/institutions/`: Gerencia instituições (`GET`, `POST`, `PUT`, `DELETE`)
+- `/courses/`: Gerencia cursos (`GET`, `POST`, `PUT`, `DELETE`)
+- `/disciplines/`: Gerencia disciplinas (`GET`, `POST`, `PUT`, `DELETE`)
+- `/professors/`: Gerencia professores (`GET`, `POST`, `PUT`, `DELETE`)
+- `/students/`: Gerencia alunos (`GET`, `POST`, `PUT`, `DELETE`)
+- `/enrollments/`: Gerencia matrículas (`GET`, `POST`, `PUT`, `DELETE`)
 
-| Recurso       | Endpoint                  | Métodos HTTP          |
-|---------------|---------------------------|-----------------------|
-| Instituições  | `/api/institutions/`      | `GET`, `POST`, `PUT`, `DELETE` |
-| Cursos        | `/api/courses/`           | `GET`, `POST`, `PUT`, `DELETE` |
-| Disciplinas   | `/api/disciplines/`       | `GET`, `POST`, `PUT`, `DELETE` |
-| Professores   | `/api/teachers/`          | `GET`, `POST`, `PUT`, `DELETE` |
-| Alunos        | `/api/students/`          | `GET`, `POST`, `PUT`, `DELETE` |
-| Matrículas    | `/api/enrollments/`       | `GET`, `POST`, `PUT`, `DELETE` |
+## 📝 Exemplo de Uso
 
-# Exemplo de Uso
+Você pode testar a API usando ferramentas como `curl` ou Postman.
 
-### Listar instituições
->curl http://localhost:8000/api/institutions/
+**Criar uma nova instituição:**
+```bash
+curl -X POST \
+  http://localhost:8000/api/institutions/ \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Universidade de Exemplo",
+    "city": "São Paulo"
+  }'
+```
 
-### Criar instituição
->curl -X POST http://localhost:8000/api/institutions/ \
-  >-H "Content-Type: application/json" \
-  >-d '{"name": "Universidade Teste", "code": "UNTEST"}'
+# 📂 Estrutura do Projeto
 
-#Comandos Úteis
+O projeto segue a seguinte estrutura de diretórios:
 
-### Ver logs
-docker-compose logs web
+* `backend/`: Contém o projeto principal Django.
+* `catalog/`: Aplicação Django responsável pelos modelos e views da API.
+* `requirements.txt`: Lista as dependências do projeto.
+* `Dockerfile`: Instruções para criar a imagem Docker do backend.
+* `docker-compose.yml`: Arquivo para orquestração de contêineres Docker (backend e banco de dados).
 
-### Parar serviços
-docker-compose down
-
-### Acessar container
-docker-compose exec web bash
-
-### Migrações
-docker-compose exec web python manage.py makemigrations
-docker-compose exec web python manage.py migrate
-
-## Estrutura do Projeto Backend
-
-- **backend/**
-  - **catalog/**: App principal do projeto
-  - **backend/**: Configurações globais (settings, urls, etc.)
-  - **requirements.txt**: Lista de dependências do Python
-  - **Dockerfile**: Instruções para construir a imagem Docker da aplicação
-
-# Desenvolvido por
-Anderson - GitHub
-
+# 🤝 Contribuição
+Sinta-se à vontade para abrir issues ou enviar pull requests para este projeto.
