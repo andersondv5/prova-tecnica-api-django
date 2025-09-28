@@ -49,6 +49,36 @@ Siga os passos abaixo para configurar e rodar o projeto localmente:
     docker-compose exec backend python manage.py createsuperuser
     ```
 
+### Rodar o Backend (Docker + Django)
+
+* Abra o terminal e execute:
+```bash
+    cd prova-tecnica-api
+    cd backend
+    docker-compose up --build
+```
+
+### Rodar o Frontend (Django App)
+
+* Abra um novo terminal e execute:
+```bash
+    cd prova-tecnica-api
+    cd frontend
+    python manage.py runserver
+```
+
+* Realize as migrações do banco de dados
+
+```bash
+docker-compose exec backend python manage.py migrate
+```
+
+* Crie um superusuário (opcional)
+
+```bash
+docker-compose exec backend python manage.py createsuperuser
+```
+
 ## 🗺️ Endpoints e URLs
 
 Após a execução, os seguintes URLs estarão disponíveis:
